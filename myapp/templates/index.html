@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+</head>
+<body>
+    <a href="{% url 'log-out' %}">Log Out</a>
+    <h1>Group: {{g_name}}</h1>
+    <textarea name="" id="chat-log" cols="93" rows="20" disabled>
+
+        {% for chat in chats %}
+            {{chat.content}}
+        {% endfor %}
+
+    </textarea>
+    <br>
+    <input type="text" id="chat-msg-input" size="100">
+    <br>
+    <input type="submit" value="Send" id="chat-msg-submit">
+    
+    {{g_name|json_script:'group-name'}}
+
+    <script>
+        const groupName = JSON.parse(document.getElementById('group-name').textContent)
+        var ws = new WebSocket('ws://127.0.0.1:8000/ws/jwc/'+ groupName + '/')
+        // var ws = new WebSocket('ws://127.0.0.1:8000/ws/ajwc/'+ groupName + '/')
+
+
+        ws.onopen = function () {
+            console.log('WebSocket connection open...', event)
+            // ws.send('hii from client')
+        }
+        ws.onmessage = function () {
+            console.log('new msg from server...', event.data)
+            console.log('new msg from server...', event)
+            const data = JSON.parse(event.data)
+            document.querySelector('#chat-log').value += (data.message + '\n')
+        }
+        ws.onclose = function () {
+            console.log('disconnected...', event)
+        }
+
+        document.getElementById('chat-msg-submit').onclick = 
+        function(event) {
+            const messageInputDom = document.getElementById('chat-msg-input')
+            const message = messageInputDom.value
+            ws.send(JSON.stringify({
+                'msg' : message
+            }))
+            messageInputDom.value = ''
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="../static/cs/signup.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+</head>
+<body>
+
+    <div class="container-form">
+
+        <!-- <h1 class="heading">Sign Up</h1> -->
+
+        <div class="logo"><i class="far fa-user-circle"></i></div>
+
+        <form action="" method="POST" class="form" novalidate>
+            {% csrf_token %}
+            <ul>
+            {% for fm in form %}
+            <!-- <li>{{fm.label_tag}}  {{fm}}</li>  <li class="errors">{{fm.errors|striptags}}</li>  -->
+            <li>  {{fm}}</li>  <li class="errors">{{fm.errors|striptags}}</li>
+            {% endfor %}
+        </ul>
+            <input id="sub-button" class="btn submit" type="submit" value="Log In">
+        {% if messages %}
+        <ul>
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{message.tags}} " style="color: green; font-size: 20px;" {% endif %}> {{message}} </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        </form>
+        <p>Don't have an account ?
+        <a href="{% url 'sign-up' %}">Get Here</a>
+        </p>
+        </div>
+
+    
+</body>
+</html>
