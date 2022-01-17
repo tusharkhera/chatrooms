@@ -2,6 +2,7 @@ from channels.generic.websocket import JsonWebsocketConsumer, AsyncJsonWebsocket
 from asgiref.sync import async_to_sync
 from .models import *
 from channels.db import database_sync_to_async
+import datetime
 
 class MyJsonWebSocketConsumer(JsonWebsocketConsumer) :
     def connect(self):
@@ -16,16 +17,19 @@ class MyJsonWebSocketConsumer(JsonWebsocketConsumer) :
         group = Group.objects.get(name=self.group_name)
         if self.scope['user'].is_authenticated :
             chat = Chat(
-                content = str(self.scope['user']) + ' : ' +  str(content['msg']),
-                group = group
+                content = content['msg'],
+                group = group,
+                sender = self.scope['user']
             )
             chat.save()
-
+            content['user'] = self.scope['user'].username
+            # content['dt'] = str(datetime.time())
+            # print(datetime.time())
             async_to_sync(self.channel_layer.group_send)(
                 self.group_name,
                 {
                     'type' : 'chat.message',
-                    'message' : str(self.scope['user']) + ' : ' +  str(content['msg'])
+                    'message' : content
                 }
             )
         else:

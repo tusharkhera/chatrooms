@@ -6,10 +6,10 @@ class Chat(models.Model) :
     content = models.CharField(max_length=10000)
     timestamp = models.DateTimeField(auto_now=True)
     group = models.ForeignKey('Group', on_delete=models.CASCADE)
-    # sender = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    def __str__(self):
-        return str(self.id)
+    # def __str__(self):
+    #     return str(self.id)
 
 class Group(models.Model) :
     name = models.CharField(max_length=255)
