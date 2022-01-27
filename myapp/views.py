@@ -1,29 +1,52 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.views import View
 from .models import *
-from .forms import GroupForm, SignUpForm, MyAuthenticationForm
+from .forms import GroupForm, JoinForm, SignUpForm, MyAuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm , PasswordResetForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.utils.crypto import get_random_string
+
+
+
 
 # Create your views here.
-def index(request, group_name) :
-    grp = Group.objects.filter(name=group_name).first()
+def index(request, group_id) :
+    grp = Group.objects.filter(unique_id=group_id).first()
     chats = []
+    u_id = group_id
+    g_name = Group.objects.get(unique_id=group_id).name
+
     if grp :
         chats = Chat.objects.filter(group=grp)
     else:
-        grp = Group(name = group_name)
-        grp.save()
+        pass
 
-    return render(request, 'index.html', {'g_name' : group_name, 'chats':chats})
+    return render(request, 'index.html', {'g_name' : g_name, 'g_id' : u_id, 'chats':chats})
+
+
 
 def home(request) :
+    return render(request, 'home.html')
+
+def createRoom(request) :
     if request.method == 'GET' :
         fm = GroupForm()
-        return render(request, 'home.html', {'form':fm})
+        return render(request, 'createRoom.html', {'form':fm})
     else:
-        return HttpResponseRedirect('/room/' + request.POST.get('group') + '/')
+        u_id = get_random_string(32)
+        grp = Group(name = request.POST.get('group'), unique_id = u_id)
+        grp.save()
+        return HttpResponseRedirect('/room/' + u_id + '/')
+
+def joinRoom(request) :
+    if request.method == 'GET' :
+        fm = JoinForm()
+        return render(request, 'joinRoom.html', {'form':fm})
+    else:
+        print('else')
+        u_id = request.POST.get('room_id')
+        return HttpResponseRedirect('/room/' + u_id + '/')
     
 class SignUpView(View) :
     def get(self,request):

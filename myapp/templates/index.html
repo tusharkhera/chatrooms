@@ -11,6 +11,9 @@
   </head>
   <body>
     <a href="{% url 'log-out' %}">Log Out</a>
+    <p id="join-code">{{g_id}}</p>
+    <button onclick=Hello()>
+    click to copy join code</button>
     <div class="intro">
     <h1>{{g_name}}</h1>
     <h1>{{request.user}}</h1>
@@ -34,10 +37,11 @@
 </div>
 
     {{g_name|json_script:'group-name'}}
+    {{g_id|json_script:'group-id'}}
 
     <script>
       const groupName = JSON.parse(
-        document.getElementById("group-name").textContent
+        document.getElementById("group-id").textContent
       );
       var ws = new WebSocket("ws://127.0.0.1:8000/ws/jwc/" + groupName + "/");
       // var ws = new WebSocket('ws://127.0.0.1:8000/ws/ajwc/'+ groupName + '/')
@@ -71,6 +75,13 @@
         );
         messageInputDom.value = "";
       };
+
+      function Hello() {
+      var copyText = document.getElementById('join-code')
+      copyText.select();
+      document.execCommand('copy')
+}
     </script>
   </body>
-</html>
+</html> 
+

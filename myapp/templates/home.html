@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/jpg" href="{% static 'img/favicon.ico' %}"/>
-    <title>Welcome to ChatRooms</title>
+    <title>home</title>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
-
-    <a href="{% url 'log-out' %}">Log Out</a>
     
+    <a href="{% url 'join-room' %}">Join Room</a>
+    <a href="{% url 'create-room' %}">Create Room</a>
+
 </body>
 </html>

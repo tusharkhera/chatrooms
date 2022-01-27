@@ -13,6 +13,7 @@ class Chat(models.Model) :
 
 class Group(models.Model) :
     name = models.CharField(max_length=255)
+    unique_id = models.CharField(max_length=50, default='')
 
     def __str__(self) :
-        return self.name
+        return self.unique_id

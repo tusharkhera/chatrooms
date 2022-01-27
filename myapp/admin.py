@@ -8,4 +8,4 @@ class ChatModelAdmin(admin.ModelAdmin) :
 
 @admin.register(Group)
 class GroupModelAdmin(admin.ModelAdmin) :
-    list_display = ['id', 'name']
+    list_display = ['id', 'name', 'unique_id']

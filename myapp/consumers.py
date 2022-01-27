@@ -13,8 +13,7 @@ class MyJsonWebSocketConsumer(JsonWebsocketConsumer) :
 
     def receive_json(self, content, **kwargs) :
         print('content...', content)
-        # print(self.scope, self.scope['user'].username)
-        group = Group.objects.get(name=self.group_name)
+        group = Group.objects.get(unique_id=self.group_name)
         if self.scope['user'].is_authenticated :
             chat = Chat(
                 content = content['msg'],

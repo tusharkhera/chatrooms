@@ -20,3 +20,6 @@ class MyAuthenticationForm(AuthenticationForm) :
 
 class GroupForm(forms.Form) :
     group = forms.CharField(max_length=255)
+
+class JoinForm(forms.Form) :
+    room_id = forms.CharField(max_length=50)
