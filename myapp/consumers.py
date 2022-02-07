@@ -22,7 +22,7 @@ class MyJsonWebSocketConsumer(JsonWebsocketConsumer) :
             )
             chat.save()
             content['user'] = self.scope['user'].username
-            # content['dt'] = str(datetime.time())
+            content['dt'] = str(datetime.datetime.now())[10:16:]
             # print(datetime.time())
             async_to_sync(self.channel_layer.group_send)(
                 self.group_name,

@@ -8,16 +8,23 @@
     <title>Chat App</title>
     <link rel="shortcut icon" type="image/jpg" href="{% static 'img/favicon.ico' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "cs/chat.css" %}"/>
+    
   </head>
   <body>
     <a href="{% url 'log-out' %}">Log Out</a>
-    <p id="join-code">{{g_id}}</p>
-    <button onclick=Hello()>
-    click to copy join code</button>
+    <p hidden id="join-code">{{g_id}}</p>
+    {% if request.user == admin %}
+      <form action="{% url 'del-grp' %}" method="post">
+        {% csrf_token %}
+        <input name="grp-id" type="text" hidden value="{{g_id}}">
+        <input type="submit" value="Delete Room">
+      </form>
+    {% endif %}
+<button onclick="copyToClipboard('#join-code')">Click to Copy Join-Code</button>
     <div class="intro">
     <h1>{{g_name}}</h1>
     <h1>{{request.user}}</h1>
-</div>
+</div> 
      <div id="chat-log" contenteditable>
     
         {% for chat in chats %}
@@ -31,10 +38,10 @@
         {% endfor %}
         
     </div> 
-    <div class="sendbar">
+    <form class="sendbar">
     <input type="text" id="chat-msg-input" />
     <input type="submit" value="Send" id="chat-msg-submit" />
-</div>
+    </form>
 
     {{g_name|json_script:'group-name'}}
     {{g_id|json_script:'group-id'}}
@@ -57,7 +64,7 @@
         console.log("new msg from server...", event);
         const data = JSON.parse(event.data);
         // document.querySelector("#chat-log").value += (data.message + "\n");
-        document.querySelector("#chat-log").innerHTML += "<div class='msg'> <div class='msg-head'><b>" + data.message.user + "</b> </div>"+ data.message.msg + "</div>";
+        document.querySelector("#chat-log").innerHTML += "<div class='msg'> <div class='msg-head'><b>" + data.message.user + "</b> <small>"+data.message.dt+"</small> </div>"+ data.message.msg + "</div>";
         var myDiv = document.getElementById("chat-log");
         myDiv.scrollTop = myDiv.scrollHeight;
       };
@@ -81,7 +88,16 @@
       copyText.select();
       document.execCommand('copy')
 }
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </body>
 </html> 
 

@@ -1,3 +1,5 @@
+from tokenize import group
+from django import http
 from django.shortcuts import render, HttpResponseRedirect
 from django.views import View
 from .models import *
@@ -12,17 +14,21 @@ from django.utils.crypto import get_random_string
 
 # Create your views here.
 def index(request, group_id) :
-    grp = Group.objects.filter(unique_id=group_id).first()
-    chats = []
-    u_id = group_id
-    g_name = Group.objects.get(unique_id=group_id).name
+    if request.user.is_authenticated :
+        grp = Group.objects.filter(unique_id=group_id).first()
+        chats = []
+        u_id = group_id
+        g_name = Group.objects.get(unique_id=group_id).name
+        admin = Group.objects.get(unique_id=group_id).admin
+        print(admin)
+        if grp :
+            chats = Chat.objects.filter(group=grp)
+        else:
+            pass
 
-    if grp :
-        chats = Chat.objects.filter(group=grp)
+        return render(request, 'index.html', {'g_name' : g_name, 'g_id' : u_id, 'chats':chats, 'admin':admin})
     else:
-        pass
-
-    return render(request, 'index.html', {'g_name' : g_name, 'g_id' : u_id, 'chats':chats})
+        return HttpResponseRedirect('/login/')
 
 
 
@@ -30,23 +36,36 @@ def home(request) :
     return render(request, 'home.html')
 
 def createRoom(request) :
-    if request.method == 'GET' :
-        fm = GroupForm()
-        return render(request, 'createRoom.html', {'form':fm})
+    if request.user.is_authenticated :
+        if request.method == 'GET' :
+            fm = GroupForm()
+            return render(request, 'createRoom.html', {'form':fm})
+        else:
+            u_id = get_random_string(32)
+            grp = Group(name = request.POST.get('group'), unique_id = u_id, admin=request.user)
+            grp.save()
+            ins = Group.objects.get(unique_id = u_id)
+            db = ChatList(chat_user=request.user, grp= ins)
+            db.save()
+            return HttpResponseRedirect('/room/' + u_id + '/')
     else:
-        u_id = get_random_string(32)
-        grp = Group(name = request.POST.get('group'), unique_id = u_id)
-        grp.save()
-        return HttpResponseRedirect('/room/' + u_id + '/')
+        return HttpResponseRedirect('/login/')
+
 
 def joinRoom(request) :
-    if request.method == 'GET' :
-        fm = JoinForm()
-        return render(request, 'joinRoom.html', {'form':fm})
+    if request.user.is_authenticated :
+        if request.method == 'GET' :
+            fm = JoinForm()
+            return render(request, 'joinRoom.html', {'form':fm})
+        else:
+            ins = Group.objects.get(unique_id = request.POST.get('room_id'))
+            if not ChatList.objects.filter(chat_user=request.user, grp= ins) :
+                db = ChatList(chat_user=request.user, grp= ins)
+                db.save()
+            u_id = request.POST.get('room_id')
+            return HttpResponseRedirect('/room/' + u_id + '/')
     else:
-        print('else')
-        u_id = request.POST.get('room_id')
-        return HttpResponseRedirect('/room/' + u_id + '/')
+        return HttpResponseRedirect('/login/')
     
 class SignUpView(View) :
     def get(self,request):
@@ -83,3 +102,17 @@ def log_in(request):
 def log_out(request):
     logout(request)
     return HttpResponseRedirect('/login/')
+
+def chats(request) :
+    if request.user.is_authenticated :
+        chats = ChatList.objects.filter(chat_user=request.user)
+        # print(chats)
+        return render(request, 'chatlist.html', {'chats':chats})
+    else:
+        return HttpResponseRedirect('/login/')
+
+def delete_room(request) :
+    print(request.POST.get('grp-id'))
+    ins = Group.objects.get(unique_id = request.POST.get('grp-id'))
+    ins.delete()
+    return HttpResponseRedirect('/')
