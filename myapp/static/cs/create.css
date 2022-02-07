@@ -5,7 +5,6 @@
 }
 
 :root {
-	/* --green: rgb(36, 224, 18); */
 	--green: #00d03a;
 	--blue: #ff08ea;
 	--dark-blue: #33062f;
@@ -14,21 +13,22 @@
 body {
 	font-family: 'Poppins', sans-serif;
 }
+
 .wrapper {
 	display: flex;
 	width: 1170px;
 	margin: auto;
 	justify-content: space-around;
 }
+
 header {
-	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/internet-g7cff5e0ae_1920.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url('../img/woman-g36ffa365d_1920.jpg');
 	height: 100vh;
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-position: center center;
 	position: relative;
 }
-
 
 .main-navigation li a:hover {
 	background: #fff;
@@ -42,23 +42,26 @@ header {
 	color: var(--dark-blue);
 }
 
-.welcome-text {
-	position: absolute;
-	width: 600px;
-	height: 300px;
-	margin: 20% 30%;
-	text-align: center;
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
 }
-.welcome-text h1 {
+
+
+.box h1 {
 	text-align: center;
 	color: #fff;
 	text-transform: uppercase;
-	font-size: 60px;
+	font-size: 30px;
 }
-.welcome-text h1 span {
+.box h1 span {
 	color: var(--dark-blue);
 }
-.welcome-text a {
+.box a {
 	border: 1px solid var(--dark-blue);
 	padding: 10px 25px;
 	text-decoration: none;
@@ -69,12 +72,53 @@ header {
 	display: inline-block;
 	color: #fff;
 }
-.welcome-text a:hover {
+.box a:hover {
 	border: none;
 	background: #fff;
 	color: var(--dark-blue);
 	text-shadow: none;
 }
+
+.box form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inpt-fld {
+    border: 1px solid var(--dark-blue);
+	padding: 10px 25px;
+	text-decoration: none;
+	font-size: 14px;
+    width: 30vw;
+}
+
+.btn {
+    border: 1px solid var(--dark-blue);
+	padding: 10px 25px;
+	text-decoration: none;
+	text-shadow: 1px 1px 2px var(--dark-blue);
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-top: 20px;
+	display: inline-block;
+	color: #fff;
+    width: fit-content;
+}
+
+.btn:hover {
+	border: none;
+	background: #fff;
+	color: var(--dark-blue);
+	text-shadow: none;
+}
+
+.in-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /*resposive*/
 
 @media (max-width:600px) {
@@ -100,14 +144,6 @@ header {
 	}
 	.nav-area {
 		text-align: center;
-	}
-	.welcome-text {
-		width: 100%;
-		height: auto;
-		margin: 30% 0;
-	}
-	.welcome-text h1 {
-		font-size: 30px;
 	}
 }
 
@@ -164,3 +200,4 @@ header {
   }
   
   ul:after { clear: both; }
+

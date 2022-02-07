@@ -19,7 +19,7 @@ class MyAuthenticationForm(AuthenticationForm) :
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Enter Password'}))
 
 class GroupForm(forms.Form) :
-    group = forms.CharField(max_length=255)
+    group = forms.CharField(label='', max_length=255,widget=forms.PasswordInput(attrs={'placeholder':'Enter Room Name to Create', 'class':'inpt-fld'}))
 
 class JoinForm(forms.Form) :
-    room_id = forms.CharField(max_length=50)
+    room_id = forms.CharField(label='', max_length=50, widget=forms.PasswordInput(attrs={'placeholder':'Enter Room Code to Join', 'class':'inpt-fld'}))
