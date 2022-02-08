@@ -21,7 +21,7 @@ body {
 	justify-content: space-around;
 }
 header {
-	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/internet-g7cff5e0ae_1920.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/mobile-phone-gcf87c795b_1920.png');
 	height: 100vh;
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -34,6 +34,7 @@ header {
 	background: #fff;
 	color: #333;
 }
+
 
 .logo h1 {
 	/* width: 130px; */

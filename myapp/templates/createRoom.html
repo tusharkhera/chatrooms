@@ -46,10 +46,10 @@
             <form action="" method="post">
                 {% csrf_token %}
                 {{ form }}
-                <input class="btn" type="submit" value="JOIN ROOM">
+                <input class="btn" type="submit" value="CREATE ROOM">
             </form>
             <div class="in-box">
-                <h1>Don't have a Chat Room ?</h1>
+                <h1>Join Existing Chat Room ?</h1>
                 <a class="btn"  href="{% url 'join-room' %}">Join Room</a>
         </div>
         </div>

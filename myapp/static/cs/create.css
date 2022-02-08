@@ -22,7 +22,8 @@ body {
 }
 
 header {
-	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url('../img/woman-g36ffa365d_1920.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../img/internet-g7cff5e0ae_1920.jpg');
+	/* background-size: 1580px 750px; */
 	height: 100vh;
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -86,7 +87,8 @@ header {
 }
 
 .inpt-fld {
-    border: 1px solid var(--dark-blue);
+    border: 2px solid var(--dark-blue);
+	border-radius: 30px;
 	padding: 10px 25px;
 	text-decoration: none;
 	font-size: 14px;
@@ -107,7 +109,7 @@ header {
 }
 
 .btn:hover {
-	border: none;
+	/* border: none; */
 	background: #fff;
 	color: var(--dark-blue);
 	text-shadow: none;

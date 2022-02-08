@@ -12,18 +12,18 @@
     margin: auto;
 }
 
-#chat-log {
-    margin: auto;
+#chat-lg {
+    /* margin: auto;
     padding: 1rem;
     color: white;
-    /* color: blue; */
     display: flex;
     flex-direction: column;
     gap: 1rem;
     border: 2px solid purple;
-    background-color: white;
+    background-color: white; */
     height: 70vh;
-    width: 70vw;
+    border: none;
+    overflow-x: hidden;
     overflow-y: scroll;
     /* border: 2px solid black; */
 }
@@ -44,6 +44,7 @@
 }
 
 .sendbar {
+    margin-top: 0%;
     display: flex;
     width: 70vw;
     justify-content: space-between;
@@ -63,6 +64,17 @@
 .sendbar #chat-msg-submit {
     border: 1px solid purple;
     border-radius: 1.5rem;
+    width: 10vw;
     font-size: larger;
     color: rebeccapurple;
 }
+
+
+
+
+
+
+
+
+
+

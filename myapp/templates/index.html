@@ -1,3 +1,4 @@
+{% load sass_tags %}
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -6,11 +7,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/jpg" href="{% static 'img/favicon.ico' %}"/>
+    <link href="{% sass_src 'scss/chat.scss' %}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{% static "cs/chat.css" %}"/>
     
   </head>
   <body>
+
+    
+
+    <div class="container mb-0 col-md-8">
+      <div class="no-gutters">
+        
+        <div class="col-md-12">
+        <div class="settings-tray">
+          <div class="friend-drawer no-gutters friend-drawer--grey">
+          <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg" alt="">
+          <div class="text">
+            <h6>{{g_name}}</h6>
+            <p class="text-muted">{{request.user}}</p>
+          </div>
+          
+          <span class="settings-tray--right">
+            <i class="fas fa-plus"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          </div>
+        </div>
+        <div class="chat-panel" id="chat-lg" contenteditable>
+          {% for chat in chats %}
+          {% if chat.sender != request.user %}
+          <div class="row no-gutters">
+          <div class="col-md-3">
+            <div class="chat-bubble chat-bubble--left">
+              <div class="msg">
+                <div class="msg-head">
+                    <b>{{chat.sender}}</b>
+                <small>{{chat.timestamp|time:'H:i'}}</small>
+                </div>
+                {{chat.content}}
+                </div>
+            </div>
+          </div>
+          </div>
+          {% else %}
+          <div class="row no-gutters">
+          <div class="col-md-3 offset-md-9">
+            <div class="chat-bubble chat-bubble--right">
+              <div class="msg">
+                <div class="msg-head">
+                    <b>{{chat.sender}}</b>
+                <small>{{chat.timestamp|time:'H:i'}}</small>
+                </div>
+                {{chat.content}}
+                </div>
+            </div>
+          </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          
+        </div>
+        </div>
+        
+      </div>
+      </div>
+      <form class="sendbar">
+        <input type="text" id="chat-msg-input" />
+        <input type="submit" value="Send" id="chat-msg-submit" />
+        </form>
+
+
+
+
     <a href="{% url 'log-out' %}">Log Out</a>
     <p hidden id="join-code">{{g_id}}</p>
     {% if request.user == admin %}
@@ -21,30 +95,20 @@
       </form>
     {% endif %}
 <button onclick="copyToClipboard('#join-code')">Click to Copy Join-Code</button>
-    <div class="intro">
-    <h1>{{g_name}}</h1>
-    <h1>{{request.user}}</h1>
-</div> 
-     <div id="chat-log" contenteditable>
-    
-        {% for chat in chats %}
-        <div class="msg">
-            <div class="msg-head">
-                <b>{{chat.sender}}</b>
-            <small>{{chat.timestamp|time:'H:i'}}</small>
-            </div>
-            {{chat.content}}
-            </div>
-        {% endfor %}
-        
-    </div> 
-    <form class="sendbar">
-    <input type="text" id="chat-msg-input" />
-    <input type="submit" value="Send" id="chat-msg-submit" />
-    </form>
 
     {{g_name|json_script:'group-name'}}
     {{g_id|json_script:'group-id'}}
+
+
+
+
+
+
+    
+
+
+      
+
 
     <script>
       const groupName = JSON.parse(
@@ -63,9 +127,10 @@
         console.log("new msg from server...", event.data);
         console.log("new msg from server...", event);
         const data = JSON.parse(event.data);
-        // document.querySelector("#chat-log").value += (data.message + "\n");
-        document.querySelector("#chat-log").innerHTML += "<div class='msg'> <div class='msg-head'><b>" + data.message.user + "</b> <small>"+data.message.dt+"</small> </div>"+ data.message.msg + "</div>";
-        var myDiv = document.getElementById("chat-log");
+        
+        document.querySelector('#chat-lg').innerHTML += "{% if chat.sender != request.user %}<div class='row no-gutters'><div class='col-md-3'><div class='chat-bubble chat-bubble--left'><div class='msg'><div class='msg-head'><b>"+data.message.user+"</b><small>"+data.message.dt+"</small></div>"+data.message.msg+"</div></div></div></div>{% else %}<div class='row no-gutters'><div class='col-md-3 offset-md-9'><div class='chat-bubble chat-bubble--right'><div class='msg'><div class='msg-head'><b>"+data.message.user+"</b><small>"+data.message.dt+"</small></div>"+data.message.msg+"</div></div></div></div>{% endif %}"
+        
+        var myDiv = document.getElementById("chat-lg");
         myDiv.scrollTop = myDiv.scrollHeight;
       };
       ws.onclose = function () {
@@ -75,12 +140,16 @@
       document.getElementById("chat-msg-submit").onclick = function (event) {
         const messageInputDom = document.getElementById("chat-msg-input");
         const message = messageInputDom.value;
+        var myDiv = document.getElementById("chat-lg");
+        myDiv.scrollTop = myDiv.scrollHeight;
         ws.send(
           JSON.stringify({
             msg: message,
           })
         );
         messageInputDom.value = "";
+        var myDiv = document.getElementById("chat-lg");
+        myDiv.scrollTop = myDiv.scrollHeight;
       };
 
       function Hello() {
@@ -96,8 +165,23 @@ function copyToClipboard(element) {
   document.execCommand("copy");
   $temp.remove();
 }
+
+
+
+
+$( '.friend-drawer--onhover' ).on( 'click',  function() {
+  
+  $( '.chat-bubble' ).hide('slow').show('slow');
+  
+});
+
+
+
+
+
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html> 
 
