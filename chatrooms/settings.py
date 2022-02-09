@@ -21,8 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ['SECRET_KEY']
-SECRET_KEY = 'django-insecure-8d*q4$^=k-=)mf1@i7(dt@j&h0khmen0+mu#w$yy@adzw6gaeo'
-
+# SECRET_KEY = 'django-insecure-8d*q4$^=k-=)mf1@i7(dt@j&h0khmen0+mu#w$yy@adzw6gaeo'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-8d*q4$^=k-=)mf1@i7(dt@j&h0khmen0+mu#w$yy@adzw6gaeo')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,10 +81,21 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [os.environ.get("REDIS_URL", 'redis://localhost:6379')],
         },
+        "symmetric_encryption_keys": [SECRET_KEY],
     },
 }
+
+# CACHES = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "LOCATION": [os.environ.get("REDIS_URL", 'redis://localhost:6379')],
+#         "OPTIONS" : {
+#             "CLIENT_CLASS": "django.redis.client.DefaultClient"
+#         }
+#     },
+# }
 
 
 # Database

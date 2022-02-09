@@ -1,1 +1,1 @@
-web: waitress-serve --port=8000 chatrooms.asgi:application
+web: daphne chatrooms.asgi:application --port 8000 --bind 0.0.0.0
