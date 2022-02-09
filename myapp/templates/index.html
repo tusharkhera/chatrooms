@@ -98,15 +98,6 @@
 
 
     
-    <p hidden id="join-code">{{g_id}}</p>
-    {% if request.user == admin %}
-      <form action="{% url 'del-grp' %}" method="post">
-        {% csrf_token %}
-        <input name="grp-id" type="text" hidden value="{{g_id}}">
-        <input type="submit" value="Delete Room">
-      </form>
-    {% endif %}
-<button onclick="copyToClipboard('#join-code')">Click to Copy Join-Code</button>
 
     {{g_name|json_script:'group-name'}}
     {{g_id|json_script:'group-id'}}
@@ -126,8 +117,8 @@
       const groupName = JSON.parse(
         document.getElementById("group-id").textContent
       );
-      var ws = new WebSocket("ws://127.0.0.1:8000/ws/jwc/" + groupName + "/");
-      // var ws = new WebSocket('ws://127.0.0.1:8000/ws/ajwc/'+ groupName + '/')
+      var ws = new WebSocket("ws://chit-chatt-rooms/ws/jwc/" + groupName + "/");
+      // var ws = new WebSocket('ws://127.0.0.1:8000/ws/jwc/'+ groupName + '/')
 
       ws.onopen = function () {
         console.log("WebSocket connection open...", event);
