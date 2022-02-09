@@ -117,8 +117,8 @@
       const groupName = JSON.parse(
         document.getElementById("group-id").textContent
       );
-      var ws = new WebSocket("ws://chit-chatt-rooms/ws/jwc/" + groupName + "/");
-      // var ws = new WebSocket('ws://127.0.0.1:8000/ws/jwc/'+ groupName + '/')
+      var ws = new WebSocket("wss://chit-chatt-rooms/ws/jwc/" + groupName + "/");
+      // var ws = new WebSocket('wss://127.0.0.1:8000/ws/jwc/'+ groupName + '/')
 
       ws.onopen = function () {
         console.log("WebSocket connection open...", event);
