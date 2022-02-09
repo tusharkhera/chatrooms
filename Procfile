@@ -1,1 +1,1 @@
-web: waitress-serve --port=8000 chatrooms.wsgi:application
+web: waitress-serve --port=8000 chatrooms.asgi:application
