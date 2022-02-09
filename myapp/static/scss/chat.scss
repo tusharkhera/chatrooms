@@ -40,7 +40,24 @@ body {
       font-size: 25px;
       color: grey;
       margin-left: 14px;
-      transition: .3s;
+      transition: .1s;
+      
+      &:hover {
+        color: $blue;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &--rght {
+    float: right;
+    
+    i {
+      margin-top: 40px;
+      font-size: 25px;
+      color: grey;
+      margin-left: -44px;
+      transition: .1s;
       
       &:hover {
         color: $blue;
@@ -85,6 +102,9 @@ input {
 .friend-drawer {
   padding: 10px 15px;
   display: flex;
+  align-items: center;
+  gap: 1rem;
+  // justify-content: center;
   vertical-align: baseline;
   background: #fff;
   transition: .3s ease;
@@ -135,6 +155,7 @@ hr {
   border-radius: 9px;
   position: relative;
   animation: fadeIn 0.1s ease-in;
+  z-index: 10;
   
   &:after {
     content: '';

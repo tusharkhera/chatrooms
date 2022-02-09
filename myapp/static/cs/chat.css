@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+:root {
+	/* --green: rgb(36, 224, 18); */
+	--green: #00d03a;
+	--blue: #ff08ea;
+	--dark-blue: #3498db;
+  }
+
 .intro {
     width: 70vw;
     background-color: rgb(100, 6, 100);
@@ -54,7 +61,7 @@
 .sendbar #chat-msg-input {
     display: flex;
     width: 100%;
-    border: 2px solid purple;
+    border: 2px solid var(--dark-blue);
     /* border-top: transparent; */
     border-radius: 2rem;
     height: 3rem;
@@ -62,15 +69,73 @@
 }
 
 .sendbar #chat-msg-submit {
-    border: 1px solid purple;
+    border: 1px solid white;
     border-radius: 1.5rem;
     width: 10vw;
     font-size: larger;
-    color: rebeccapurple;
+    color: var(--dark-blue);
+    background-color: white;
+}
+
+.sendbar #chat-msg-submit:hover {
+    border: 1px solid white;
+    color: white;
+    background-color: var(--dark-blue);
 }
 
 
+.main-navigation{
+    list-style: none;
+    padding: 0;
+    margin-top: -30px;
+    position: absolute;
+    z-index: 100;
+  }
+  
+  ul li {
+    display: block;
+    position: relative;
+    float: left;
+  }
+  li ul { display: none; }
+  
+  ul li a {
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #fff;
+	padding: 5px 20px;
+	font-family: poppins;
+	font-size: 16px;
+	text-transform: uppercase;
+  }
+  
+  ul li a:hover { background: initial !important; }
+  li:hover > ul {
+    display: block;
+    position: absolute;
+  }
+  
+  li:hover li { float: none; }
 
+  li:hover a > li a { background: white; color: black;}
+
+  li:hover li a { background: white; }
+  
+  li:hover li a:hover { background: var(--dark-blue) !important; color: white; }
+  
+  .main-navigation li ul li { border-top: 0; }
+  ul ul ul {
+    left: 100%;
+    top: 0;
+  }
+  ul:before,
+  ul:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  
+  ul:after { clear: both; }
 
 
 

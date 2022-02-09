@@ -27,6 +27,7 @@
         <div class="col-md-12">
         <div class="settings-tray">
           <div class="friend-drawer no-gutters friend-drawer--grey">
+            <a href="{% url 'chats' %}"><i class="fas fa-arrow-left"></i></a>
           <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg" alt="">
           <div class="text">
             <h6>{{g_name}}</h6>
@@ -34,8 +35,19 @@
           </div>
           
           <span class="settings-tray--right">
-            <i class="fas fa-plus"></i>
-            <i class="fas fa-ellipsis-v"></i>
+            <p hidden id="join-code">{{g_id}}</p>
+            <ul class="main-navigation">
+              <li><a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                <ul>
+                  <li><a class="dropdown-item drop" style="font-size: 20px"  onclick="copyToClipboard('#join-code')" href="">Copy Join Code</a></li>
+                  <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'chats' %}">My chats</a></li>
+                  <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'create-room' %}">Create Room</a></li>
+                  <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'log-out' %}">Log Out</a></li>
+                </ul>
+              </li>
+            </ul>
+            
+            
           </span>
           </div>
         </div>
@@ -85,7 +97,7 @@
 
 
 
-    <a href="{% url 'log-out' %}">Log Out</a>
+    
     <p hidden id="join-code">{{g_id}}</p>
     {% if request.user == admin %}
       <form action="{% url 'del-grp' %}" method="post">

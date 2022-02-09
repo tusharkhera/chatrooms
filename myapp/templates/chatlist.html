@@ -13,20 +13,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/jpg" href="{% static 'img/favicon.ico' %}"/>
     <link href="{% sass_src 'scss/chat.scss' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static "cs/chat.css" %}"/>
     <title>Chats</title>
 </head>
 <body>
     
         
     
-    <div class="container col-md-4">
+    <div class="container col-md-5">
         <div class="no-gutters">
     <div class="col-md-12 border-right">
       <div class="settings-tray">
+        <a href="{% url 'home' %}"><i class="fas fa-arrow-left"></i></a>
         <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/filip.jpg" alt="Profile img">
-        <span class="settings-tray--right">
-        <i class="fas fa-plus"></i>
-        <i class="fas fa-ellipsis-v"></i>
+        <span class="settings-tray--rght">
+          <ul class="main-navigation">
+            <li><a href="#"><i class="fas fa-ellipsis-v"></i></a>
+              <ul>
+                <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'create-room' %}">Create Room</a></li>
+                <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'join-room' %}">Join Room</a></li>
+                <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'log-out' %}">Log Out</a></li>
+              </ul>
+            </li>
+          </ul>
         </span>
       </div>
       <div class="search-box">
@@ -50,8 +59,6 @@
         </div>
     </div>
 
-    <a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'create-room' %}">Create Another Room</a>
 
     <script>
         $( '.friend-drawer--onhover' ).on( 'click',  function() {
