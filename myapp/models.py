@@ -16,6 +16,7 @@ class Group(models.Model) :
     name = models.CharField(max_length=255)
     unique_id = models.CharField(max_length=50, default='', blank=True, null=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    group_dp = models.FileField(default=None)
 
     def __str__(self) :
         return self.unique_id

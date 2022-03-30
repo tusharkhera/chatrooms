@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('room/<str:group_id>/', views.index, name='index'),
@@ -12,4 +14,4 @@ urlpatterns = [
     path('logout/', views.log_out, name='log-out'),
     path('chats/', views.chats, name='chats'),
     path('delete/', views.delete_room, name='del-grp'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

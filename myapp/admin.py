@@ -11,7 +11,7 @@ class ChatModelAdmin(admin.ModelAdmin) :
 
 @admin.register(Group)
 class GroupModelAdmin(admin.ModelAdmin) :
-    list_display = ['id', 'name', 'unique_id', 'admin']
+    list_display = ['id', 'name', 'unique_id', 'admin', 'group_dp']
     list_filter = ['name', 'admin']
     list_per_page = 20
     # search_fields = ('name', 'unique_id', 'admin',)

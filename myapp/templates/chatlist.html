@@ -1,6 +1,8 @@
 {% load sass_tags %}
+{% load index %}
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,14 +46,19 @@
         <input placeholder="Search here" type="text">
         </div>
       </div>
+      
       {% for x in chats %}
       <div class="friend-drawer friend-drawer--onhover">
+        {% if x.grp.group_dp %}
+        <img class="profile-image" src="{{x.grp.group_dp.url }}" alt="">
+        {% else %}
         <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg" alt="">
+        {% endif %}
         <a href="http://127.0.0.1:8000/room/{{x.grp.unique_id}}/" class="text" style="text-decoration: none;">
         <h6>{{x.grp.name}}</h6>
-        <p class="text-muted">Hey, you're arrested!</p>
+        <p class="text-muted">{{l_msg|index:forloop.counter0}}</p>
         </a>
-        <span class="time text-muted small">13:21</span>
+        <span class="time text-muted small">{{l_m_time|index:forloop.counter0}}</span>
       </div>
       <hr>
       {% endfor %}

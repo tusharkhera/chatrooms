@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5ea37444-2ff5-4c46-b1b7-b23beda7f52d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/consumers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/scss/chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/scss/chat.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/scss/chat.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/scss/chat.css.map" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,7 +1,7 @@
-from tokenize import group
-from django import http
+from dateutil import tz
 from django.shortcuts import render, HttpResponseRedirect
 from django.views import View
+import pytz
 from .models import *
 from .forms import GroupForm, JoinForm, SignUpForm, MyAuthenticationForm
 from django.contrib import messages
@@ -106,8 +106,14 @@ def log_out(request):
 def chats(request) :
     if request.user.is_authenticated :
         chats = ChatList.objects.filter(chat_user=request.user)
-        # print(chats)
-        return render(request, 'chatlist.html', {'chats':chats})
+        last_msg = []
+        last_msg_time = []
+        for x in chats :
+            temp = Chat.objects.filter(group=x.grp).last()
+            last_msg.append(temp.content)
+            last_msg_time.append(temp.timestamp.astimezone(pytz.timezone('Asia/Kolkata')).strftime("%H:%M"))
+        print(last_msg_time)
+        return render(request, 'chatlist.html', {'chats':chats, 'l_msg':last_msg, 'l_m_time':last_msg_time})
     else:
         return HttpResponseRedirect('/login/')
 
