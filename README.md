@@ -1,5 +1,6 @@
 # chatrooms
 
+<div display:"flex">
 <div align="center">
     <img src="/screenshots/Screenshot (8).png" width="400px"</img> 
 </div>
@@ -26,4 +27,5 @@
 
 <div align="center">
     <img src="/screenshots/Screenshot (14).png" width="400px"</img> 
+</div>
 </div>
