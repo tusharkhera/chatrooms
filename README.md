@@ -21,5 +21,9 @@
 
 
 <div align="center">
+    <img src="/screenshots/Screenshot (12).png" width="400px"</img> 
+</div>
+
+<div align="center">
     <img src="/screenshots/Screenshot (14).png" width="400px"</img> 
 </div>
