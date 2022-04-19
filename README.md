@@ -2,9 +2,9 @@
 
 <table>
   <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
-     <td>Present day in purple and selected day in pink</td>
+    <td>Home Page</td>
+     <td>Join Room Page</td>
+     <td>Create Room Page</td>
   </tr>
   <tr>
     <td valign="top"><img src="screenshots/Screenshot (8).png"></td>
@@ -20,37 +20,19 @@
  </table>
 
 
+<table>
+  <tr>
+    <td>My Chats</td>
+     <td>Chat Page</td>
+  </tr>
+    
+  <tr>
+    <td valign="top"><img src="screenshots/Screenshot (11).png"></td>
+    <td valign="top"><img src="screenshots/Screenshot (12).png"></td>
+  </tr>
+ </table>
 
 
 
 
 
-<div float="left">
-<div align="center">
-    <img src="/screenshots/Screenshot (8).png" width="400px"</img> 
-</div>
-
-
-<div align="center">
-    <img src="/screenshots/Screenshot (9).png" width="400px"</img> 
-</div>
-
-
-<div align="center">
-    <img src="/screenshots/Screenshot (10).png" width="400px"</img> 
-</div>
-
-
-<div align="center">
-    <img src="/screenshots/Screenshot (11).png" width="400px"</img> 
-</div>
-
-
-<div align="center">
-    <img src="/screenshots/Screenshot (12).png" width="400px"</img> 
-</div>
-
-<div align="center">
-    <img src="/screenshots/Screenshot (14).png" width="400px"</img> 
-</div>
-</div>
