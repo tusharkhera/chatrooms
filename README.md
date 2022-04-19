@@ -1,6 +1,6 @@
 # chatrooms
 
-<div display="flex">
+<div float="left">
 <div align="center">
     <img src="/screenshots/Screenshot (8).png" width="400px"</img> 
 </div>
