@@ -12,11 +12,6 @@
     <td valign="top"><img src="screenshots/Screenshot (10).png"></td>
   </tr>
     
-  <tr>
-    <td valign="top"><img src="screenshots/Screenshot (11).png"></td>
-    <td valign="top"><img src="screenshots/Screenshot (12).png"></td>
-    <td valign="top"><img src="screenshots/Screenshot (14).png"></td>
-  </tr>
  </table>
 
 
