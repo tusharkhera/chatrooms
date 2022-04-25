@@ -44,6 +44,15 @@
                   <ul>
                     <li><a class="dropdown-item drop" style="font-size: 20px" onclick="copyToClipboard('#join-code')"
                         href="">Copy Join Code</a></li>
+                    {% if request.user == admin %}
+                    <li>
+                    <form action="{% url 'del-grp' %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" value="{{g_id}}" name="id">
+                      <input class="dropdown-item drop" type="submit" style="font-size: 20px" value="DELETE ROOM">
+                    </form>
+                  </li>
+                    {% endif %}
                     <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'chats' %}">My chats</a></li>
                     <li><a class="dropdown-item drop" style="font-size: 20px" href="{% url 'create-room' %}">Create
                         Room</a></li>
@@ -97,7 +106,7 @@
   </div>
   <form class="sendbar">
     <input type="text" id="chat-msg-input" />
-    <input type="submit" value="Send" id="chat-msg-submit"/>
+    <input type="submit" value="Send" id="chat-msg-submit" />
   </form>
 
 

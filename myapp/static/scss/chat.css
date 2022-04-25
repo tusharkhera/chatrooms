@@ -156,6 +156,21 @@ input:focus {
   cursor: pointer;
 }
 
+li form {
+  background-color: #fff !important;
+  border-radius: 0% !important;
+}
+
+li form:hover {
+  background-color: #3498db !important;
+  border-radius: 0% !important;
+}
+
+li form input:hover {
+  background-color: #3498db !important;
+  border-radius: 0% !important;
+}
+
 .friend-drawer--onhover:hover p,
 .friend-drawer--onhover:hover h6,
 .friend-drawer--onhover:hover .time {

@@ -110,6 +110,7 @@
 	text-transform: uppercase;
   }
   
+
   ul li a:hover { background: initial !important; }
   li:hover > ul {
     display: block;

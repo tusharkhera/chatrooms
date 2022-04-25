@@ -118,7 +118,8 @@ def chats(request) :
         return HttpResponseRedirect('/login/')
 
 def delete_room(request) :
-    print(request.POST.get('grp-id'))
-    ins = Group.objects.get(unique_id = request.POST.get('grp-id'))
+    print('yoooooooooo')
+    print('id.........', request.POST.get('id'))
+    ins = Group.objects.get(unique_id = request.POST.get('id'))
     ins.delete()
     return HttpResponseRedirect('/')
