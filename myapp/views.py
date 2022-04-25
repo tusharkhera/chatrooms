@@ -112,14 +112,14 @@ def chats(request) :
             temp = Chat.objects.filter(group=x.grp).last()
             last_msg.append(temp.content)
             last_msg_time.append(temp.timestamp.astimezone(pytz.timezone('Asia/Kolkata')).strftime("%H:%M"))
-        print(last_msg_time)
+        # print(last_msg_time)
         return render(request, 'chatlist.html', {'chats':chats, 'l_msg':last_msg, 'l_m_time':last_msg_time})
     else:
         return HttpResponseRedirect('/login/')
 
 def delete_room(request) :
-    print('yoooooooooo')
-    print('id.........', request.POST.get('id'))
+    # print('yoooooooooo')
+    # print('id.........', request.POST.get('id'))
     ins = Group.objects.get(unique_id = request.POST.get('id'))
     ins.delete()
     return HttpResponseRedirect('/')

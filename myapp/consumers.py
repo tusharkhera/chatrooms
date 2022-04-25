@@ -12,7 +12,7 @@ class MyJsonWebSocketConsumer(JsonWebsocketConsumer) :
         # self.close()    #to reject the connection request
 
     def receive_json(self, content, **kwargs) :
-        print('content...', content)
+        # print('content...', content)
         group = Group.objects.get(unique_id=self.group_name)
         if self.scope['user'].is_authenticated :
             chat = Chat(
@@ -42,7 +42,7 @@ class MyJsonWebSocketConsumer(JsonWebsocketConsumer) :
         })
 
     def disconnect(self, close_code) :
-        print(close_code)
+        # print(close_code)
         async_to_sync(self.channel_layer.group_discard)(self.group_name, self.channel_name)
 
 
@@ -55,7 +55,7 @@ class MyAsyncJsonWebSocketConsumer(AsyncJsonWebsocketConsumer) :
         await self.accept()
 
     async def receive_json(self, content, **kwargs) :
-        print('content...', content)
+        # print('content...', content)
 
         group = await database_sync_to_async(Group.objects.get)(name=self.group_name)
         chat = Chat(
@@ -78,5 +78,5 @@ class MyAsyncJsonWebSocketConsumer(AsyncJsonWebsocketConsumer) :
         })
 
     async def disconnect(self, close_code) :
-        print(close_code)
+        # print(close_code)
         await self.channel_layer.group_discard(self.group_name, self.channel_name)
